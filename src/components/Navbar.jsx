@@ -54,12 +54,26 @@ const Navbar = () => {
   return (
     <header className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-white/70 dark:bg-[#0f0f0f]/70 border-b border-gray-200 dark:border-gray-700">
       <nav className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        {/* Logo */}
+        {/* Logo with Profile Photo */}
         <a
           href="#home"
-          className="text-3xl font-bold font-signature bg-gradient-to-r from-blue-700 via-indigo-700 to-purple-600 text-transparent bg-clip-text tracking-wide"
+          className="flex items-center gap-3 group"
         >
-          Fahad
+          {/* Profile Photo */}
+          <div className="relative">
+            <img
+              src="/profile-photo.jpg" // Add your photo to the public folder
+              alt="Fahad Khan"
+              className="w-12 h-12 rounded-full object-cover border-2 border-blue-200 dark:border-blue-400 transition-all duration-300 group-hover:border-blue-400 dark:group-hover:border-blue-300 group-hover:scale-110"
+            />
+            {/* Optional: Add a subtle glow effect on hover */}
+            <div className="absolute inset-0 rounded-full bg-blue-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur-sm"></div>
+          </div>
+          
+          {/* Name */}
+          <span className="text-3xl font-bold font-signature bg-gradient-to-r from-blue-700 via-indigo-700 to-purple-600 text-transparent bg-clip-text tracking-wide transition-all duration-300 group-hover:scale-105">
+            Fahad
+          </span>
         </a>
 
         {/* Desktop Nav */}
