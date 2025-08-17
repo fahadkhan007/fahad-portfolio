@@ -16,20 +16,27 @@ import emailjs from '@emailjs/browser';
 const Contact = () => {
   const form = useRef();
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
+    from_name: '',
+    reply_to: '',
     subject: '',
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null); // 'success', 'error', null
 
+  // Replace these with your actual EmailJS configuration
+  const EMAILJS_CONFIG = {
+    SERVICE_ID: 'service_mjg9g2a', // Replace with your service ID
+    TEMPLATE_ID: 'template_0qklsk4', // Replace with your template ID  
+    PUBLIC_KEY: 'FxOqzlxlnqji9Df3S' // Replace with your public key
+  };
+
   const contactInfo = [
     {
       icon: <Mail className="w-6 h-6" />,
       label: "Email",
-      value: "your-email@example.com", // Replace with your actual email
-      link: "mailto:your-email@example.com",
+      value: "fahadkhanf715@gmail.com", // Replace with your actual email
+      link: "mailto:fahadkhanf715@gmail.com",
       color: "from-blue-500 to-blue-600"
     },
     {
@@ -77,18 +84,19 @@ const Contact = () => {
     setSubmitStatus(null);
 
     try {
-      // EmailJS configuration - You'll need to replace these with your actual values
-      await emailjs.sendForm(
-        'service_0xnfvyf',     // Replace with your EmailJS service ID
-        'YOUR_TEMPLATE_ID',    // Replace with your EmailJS template ID
+      // Send email using EmailJS
+      const result = await emailjs.sendForm(
+        EMAILJS_CONFIG.SERVICE_ID,
+        EMAILJS_CONFIG.TEMPLATE_ID,
         form.current,
-        'FxOqzlxlnqji9Df3S'      // Replace with your EmailJS public key
+        EMAILJS_CONFIG.PUBLIC_KEY
       );
 
+      console.log('EmailJS Success:', result.text);
       setSubmitStatus('success');
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      setFormData({ from_name: '', reply_to: '', subject: '', message: '' });
     } catch (error) {
-      console.error('EmailJS error:', error);
+      console.error('EmailJS Error:', error);
       setSubmitStatus('error');
     }
 
@@ -189,14 +197,14 @@ const Contact = () => {
                 {/* Name and Email Row */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Your Name
+                    <label htmlFor="from_name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Your Name *
                     </label>
                     <input
                       type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
+                      id="from_name"
+                      name="from_name"
+                      value={formData.from_name}
                       onChange={handleInputChange}
                       required
                       className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 placeholder-gray-400"
@@ -204,14 +212,14 @@ const Contact = () => {
                     />
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Email Address
+                    <label htmlFor="reply_to" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Email Address *
                     </label>
                     <input
                       type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
+                      id="reply_to"
+                      name="reply_to"
+                      value={formData.reply_to}
                       onChange={handleInputChange}
                       required
                       className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 placeholder-gray-400"
@@ -223,7 +231,7 @@ const Contact = () => {
                 {/* Subject */}
                 <div>
                   <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Subject
+                    Subject *
                   </label>
                   <input
                     type="text"
@@ -240,7 +248,7 @@ const Contact = () => {
                 {/* Message */}
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Message
+                    Message *
                   </label>
                   <textarea
                     id="message"
@@ -275,14 +283,14 @@ const Contact = () => {
 
                 {/* Status Messages */}
                 {submitStatus === 'success' && (
-                  <div className="flex items-center gap-2 text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 p-3 rounded-lg">
+                  <div className="flex items-center gap-2 text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 p-3 rounded-lg animate-fade-in-down">
                     <CheckCircle className="w-5 h-5" />
                     <span>Message sent successfully! I'll get back to you soon.</span>
                   </div>
                 )}
 
                 {submitStatus === 'error' && (
-                  <div className="flex items-center gap-2 text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 p-3 rounded-lg">
+                  <div className="flex items-center gap-2 text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 p-3 rounded-lg animate-fade-in-down">
                     <AlertCircle className="w-5 h-5" />
                     <span>Failed to send message. Please try again or contact me directly.</span>
                   </div>
@@ -298,7 +306,7 @@ const Contact = () => {
             Prefer a quick chat? Feel free to reach out directly!
           </p>
           <a
-            href="mailto:your-email@example.com"
+            href="mailto:fahad.example@gmail.com" // Replace with your actual email
             className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full font-medium hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
           >
             <Mail className="w-5 h-5" />

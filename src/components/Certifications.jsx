@@ -1,4 +1,3 @@
-// src/components/Certifications.jsx
 import React, { useState, useEffect } from "react";
 import { 
   Award, 
@@ -160,11 +159,11 @@ const Certifications = () => {
   return (
     <section
       id="certifications"
-      className="min-h-screen py-20 bg-white dark:bg-black transition-colors duration-300 relative overflow-hidden"
+      className="min-h-screen py-20 bg-white dark:bg-gradient-to-br dark:from-gray-900 dark:via-black dark:to-blue-950 transition-colors duration-300 relative overflow-hidden"
     >
-      {/* Subtle background decoration */}
-      <div className="absolute top-32 right-10 w-80 h-80 bg-blue-100 dark:bg-blue-900/20 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-3xl opacity-30"></div>
-      <div className="absolute bottom-32 left-10 w-80 h-80 bg-indigo-100 dark:bg-indigo-900/20 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-3xl opacity-30"></div>
+      {/* Dark mode background decorations - same as Contact */}
+      <div className="absolute top-32 right-10 w-80 h-80 bg-blue-100 dark:bg-blue-900/20 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-3xl opacity-30 dark:opacity-40"></div>
+      <div className="absolute bottom-32 left-10 w-80 h-80 bg-indigo-100 dark:bg-indigo-900/20 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-3xl opacity-30 dark:opacity-40"></div>
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         {/* Section Header */}
